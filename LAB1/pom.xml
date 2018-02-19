@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LAB:project xmlns:LAB="http://maven.apache.org/POM/4.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <LAB:modelVersion>4.0.0</LAB:modelVersion>
+
+    <LAB:groupId>LABS</LAB:groupId>
+    <LAB:artifactId>LAB1</LAB:artifactId>
+    <LAB:version>1.0-SNAPSHOT</LAB:version>
+    <LAB:build>
+        <LAB:plugins>
+            <LAB:plugin>
+                <LAB:groupId>org.apache.maven.plugins</LAB:groupId>
+                <LAB:artifactId>maven-compiler-plugin</LAB:artifactId>
+                <LAB:configuration>
+                    <LAB:source>1.7</LAB:source>
+                    <LAB:target>1.7</LAB:target>
+                </LAB:configuration>
+            </LAB:plugin>
+        </LAB:plugins>
+    </LAB:build>
+    <LAB:dependencies>
+        <LAB:dependency>
+            <LAB:groupId>org.postgresql</LAB:groupId>
+            <LAB:artifactId>postgresql</LAB:artifactId>
+            <LAB:version>9.4-1200-jdbc41</LAB:version>
+        </LAB:dependency>
+    </LAB:dependencies>
+</LAB:project>
