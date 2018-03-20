@@ -96,7 +96,7 @@ public class SimpleClient {
 
     private static void handleInsertion(BookWebServicePortBindingStub bookService, String author, String name, int year, int description) {
         try {
-            int result = bookService.insertNewEntry(id, author, name, year, description);
+            int result = bookService.insertNewEntry(author, name, year, description);
             if (result == 1) {
                 logger.info(SUCCESSFUL_OP);
             } else {
