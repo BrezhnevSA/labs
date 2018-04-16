@@ -4,6 +4,10 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import java.util.List;
+import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.MessageContext;import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
 
 @WebService(serviceName = "BookWebService")
 public class BookWebService {
