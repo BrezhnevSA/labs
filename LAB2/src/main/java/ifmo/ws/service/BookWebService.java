@@ -8,6 +8,30 @@ import java.util.List;
 @WebService(serviceName = "BookWebService")
 public class BookWebService {
 
+    private boolean basicAuth() {
+        MessageContext mctx = wsctx.getMessageContext();
+        Map http_headers = (Map) mctx.get(MessageContext.HTTP_REQUEST_HEADERS);
+        List userList = (List) http_headers.get("Username");
+        List passList = (List) http_headers.get("Password");
+
+        String username = "";
+        String password = "";
+        
+        if(userList!=null){
+        	username = userList.get(0).toString();
+        }
+        	
+        if(passList!=null){
+        	password = passList.get(0).toString();
+        }
+
+        if (username.equals("user") && password.equals("password")){
+        	return true;
+        }else{
+        	return false;
+        }
+    }
+    
     @WebMethod(operationName = "getBooks")
     public List<Book> getBooks(){
         BookDAO dao = new BookDAO();
@@ -34,10 +58,13 @@ public class BookWebService {
                               @WebParam(name = "name") String name,
                               @WebParam(name = "year") int year,
                               @WebParam(name = "description") int description) {
-        BookDAO dao = new BookDAO();
-        int result = dao.insertNewEntry(author, name, year, description);
-
-        return result;
+        if (basicAuth()){
+            BookDAO dao = new BookDAO();
+            int result = dao.insertNewEntry(author, name, year, description);
+            return result;
+        } else {
+            return -1;
+        }
     }
 
     @WebMethod(operationName = "updateBookEntry")
@@ -46,16 +73,24 @@ public class BookWebService {
                               @WebParam(name = "name") String name,
                               @WebParam(name = "year") int year,
                               @WebParam(name = "description") int description) {
-        BookDAO dao = new BookDAO();
-        int result = dao.updateBookEntry(id, author, name, year, description);
-        return result;
+        if (basicAuth()){
+            BookDAO dao = new BookDAO();
+            int result = dao.updateBookEntry(id, author, name, year, description);
+            return result;
+        } else {
+            return -1;
+        }
     }
 
     @WebMethod(operationName = "removeBookEntry")
     public int removeBookEntry(@WebParam(name = "id") int id) {
-        BookDAO dao = new BookDAO();
-        int result = dao.removeBookEntry(id);
-        return result;
+        if (basicAuth()){
+            BookDAO dao = new BookDAO();
+            int result = dao.removeBookEntry(id);
+            return result;
+        } else {
+            return -1;
+        }
     }
 
 }
