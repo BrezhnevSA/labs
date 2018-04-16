@@ -26,6 +26,14 @@ public class SimpleClient {
         try {
             BookWebService_ServiceLocator locator = new BookWebService_ServiceLocator();
             BookWebServicePortBindingStub bookService = (BookWebServicePortBindingStub) locator.getBookWebServicePort(url);
+            
+            Map<String, Object> req_c = ((BindingProvider)hello).getRequestContext();
+            req_c.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, WS_URL);
+            Map<String, List<String>> headers = new HashMap<String, List<String>>();
+            headers.put("Username", Collections.singletonList("user"));
+            headers.put("Password", Collections.singletonList("password"));
+            req_c.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
+            
             initCli(bookService);
         } catch (RemoteException | ServiceException e) {
             logger.log(Level.SEVERE, "An exception is occured: ", e);
